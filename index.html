@@ -157,22 +157,12 @@ body{ color:white; }
         display: none; /* optional: hide button on mobile */
       }
     }
-
-    /* VIDEO */
-    #bg-video{
-      position:fixed;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      z-index:-2;
-    }
-    .overlay{
-      position:fixed;
-      width:100%;
-      height:100%;
-      background:rgba(0,0,0,0.75);
-      z-index:-1;
-    }
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+}
 
     /* NAV */
     nav{
@@ -621,7 +611,7 @@ body{ color:white; }
   gap: 15px;
   padding: 20px;
   border-radius: 12px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(223, 184, 184, 0.05);
 }
 
 .info-card i {
@@ -649,7 +639,7 @@ body{ color:white; }
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(230, 168, 168, 0.05);
   transition: 0.3s;
 }
 
@@ -668,10 +658,6 @@ body{ color:white; }
 </head>
 
 <body>
-
-<video autoplay muted loop id="bg-video">
-  <source src="videoplayback.mp4" type="video/mp4">
-</video>
 
 <header>
     <a href="#home" class="logo">Praful Singh</a>
