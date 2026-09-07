@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prafulsingh.com.np/sitemap.xml
