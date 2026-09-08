@@ -26,6 +26,9 @@
   <meta property="twitter:description" content="Explore projects, skills, and education of Praful Singh. Developer specializing in Web Development, Python, and AI/ML projects.">
   <meta property="twitter:image" content="https://prafulsingh.com.np/self.jpeg">
 
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="manifest.json">
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
@@ -62,11 +65,15 @@
       <li><a href="#education">Education</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#ai-demo">AI Demo</a></li>
       <li><a href="#achievements">Achievements</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
 
     <div class="nav-actions">
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle light and dark theme" title="Toggle Light/Dark Theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
       <a href="https://github.com/RajputPraful" target="_blank" rel="noopener noreferrer" class="github-btn">
         <i class="fa-brands fa-github"></i> GitHub
       </a>
@@ -77,6 +84,7 @@
        HERO SECTION
        ========================================================================= -->
   <section class="hero" id="home">
+    <canvas id="hero-canvas" class="hero-bg-canvas" aria-hidden="true"></canvas>
     <div class="hero-content reveal">
       <div class="hero-badge">
         <i class="fa-solid fa-sparkles"></i> Welcome to my portfolio
@@ -232,9 +240,17 @@
       <h2 class="section-title">My Skills</h2>
     </div>
 
+    <!-- Skill Filter Tabs -->
+    <div class="skill-filters reveal">
+      <button class="skill-filter-btn active" data-filter="all">All Skills</button>
+      <button class="skill-filter-btn" data-filter="languages">Languages</button>
+      <button class="skill-filter-btn" data-filter="web">Web & UI</button>
+      <button class="skill-filter-btn" data-filter="tools">Tools & AI</button>
+    </div>
+
     <div class="skills-container">
       <!-- Category 1: Languages -->
-      <div class="skill-category-card reveal">
+      <div class="skill-category-card reveal" data-category="languages">
         <h3 class="category-title">
           <i class="fa-solid fa-code"></i> Programming Languages
         </h3>
@@ -281,7 +297,7 @@
       </div>
 
       <!-- Category 2: Web & Frontend -->
-      <div class="skill-category-card reveal">
+      <div class="skill-category-card reveal" data-category="web">
         <h3 class="category-title">
           <i class="fa-solid fa-layer-group"></i> Web & Frontend
         </h3>
@@ -324,7 +340,7 @@
       </div>
 
       <!-- Category 3: Tools & AI -->
-      <div class="skill-category-card reveal">
+      <div class="skill-category-card reveal" data-category="tools">
         <h3 class="category-title">
           <i class="fa-solid fa-screwdriver-wrench"></i> Tools & Technologies
         </h3>
@@ -391,11 +407,43 @@
             <a href="https://github.com/RajputPraful/Flappy-Bird" target="_blank" rel="noopener noreferrer" class="project-link-btn link-primary">
               <i class="fa-brands fa-github"></i> View Code
             </a>
+            <button class="project-link-btn link-secondary project-quick-btn" data-project="flappy-bird" aria-label="Quick View details for Flappy Bird Game">
+              <i class="fa-solid fa-expand"></i> Quick View
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- Project 2 -->
+      <!-- Project 2: Swadika E-Commerce -->
+      <div class="project-card reveal">
+        <div class="project-img-wrapper">
+          <img src="swadika.webp" alt="SWADIKA - Authentic Nepali Spices & Sweets Store" loading="lazy" width="350" height="200">
+          <span class="project-badge">Web Dev / E-Commerce</span>
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">Swadika Store</h3>
+          <p class="project-impact">
+            A premium web store for authentic Nepali spices and sweets, featuring product catalog exploration, category filters, interactive cart, and user account portal.
+          </p>
+          <div class="project-tags">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">E-Commerce</span>
+            <span class="tag">Responsive UI</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/RajputPraful/SWADIKA" target="_blank" rel="noopener noreferrer" class="project-link-btn link-primary">
+              <i class="fa-brands fa-github"></i> View Code
+            </a>
+            <button class="project-link-btn link-secondary project-quick-btn" data-project="swadika" aria-label="Quick View details for Swadika Store">
+              <i class="fa-solid fa-expand"></i> Quick View
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
       <div class="project-card reveal">
         <div class="project-img-wrapper">
           <img src="yolo.webp" alt="YOLO Object Detection Dataset Augmentation Project" loading="lazy" width="350" height="200">
@@ -416,11 +464,14 @@
             <a href="https://github.com/RajputPraful/yolo_dataset_project" target="_blank" rel="noopener noreferrer" class="project-link-btn link-primary">
               <i class="fa-brands fa-github"></i> View Code
             </a>
+            <button class="project-link-btn link-secondary project-quick-btn" data-project="yolo-augmenter" aria-label="Quick View details for YOLO Dataset Augmenter">
+              <i class="fa-solid fa-expand"></i> Quick View
+            </button>
           </div>
         </div>
       </div>
 
-      <!-- Project 3 -->
+      <!-- Project 4 -->
       <div class="project-card reveal">
         <div class="project-img-wrapper">
           <img src="yolo-detection.webp" alt="Worker Safety Detection AI Project" loading="lazy" width="350" height="200">
@@ -438,10 +489,68 @@
             <span class="tag">Real-Time Detection</span>
           </div>
           <div class="project-links">
-            <a href="https://github.com/RajputPraful" target="_blank" rel="noopener noreferrer" class="project-link-btn link-secondary">
+            <a href="https://github.com/RajputPraful" target="_blank" rel="noopener noreferrer" class="project-link-btn link-primary">
               <i class="fa-solid fa-clock"></i> Coming Soon
             </a>
+            <button class="project-link-btn link-secondary project-quick-btn" data-project="worker-safety" aria-label="Quick View details for Worker Safety Detection AI">
+              <i class="fa-solid fa-expand"></i> Quick View
+            </button>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       IN-BROWSER AI OBJECT DETECTION TECH DEMO
+       ========================================================================= -->
+  <section id="ai-demo">
+    <div class="section-header reveal">
+      <p class="section-subtitle">Live ML Tech Showcase</p>
+      <h2 class="section-title">In-Browser AI Detection Demo</h2>
+    </div>
+
+    <div class="ai-demo-card reveal">
+      <div class="ai-demo-header">
+        <div class="ai-info-text">
+          <h3><i class="fa-solid fa-brain gradient-text"></i> Real-Time Vision Model</h3>
+          <p>This demo lazily loads a lightweight COCO-SSD neural network model in client JS to perform object detection directly inside your browser!</p>
+        </div>
+        <div id="ai-model-status" class="ai-model-badge">
+          <i class="fa-solid fa-spinner fa-spin"></i> Scroll to load model
+        </div>
+      </div>
+
+      <div class="ai-controls">
+        <div class="sample-pickers">
+          <span class="sample-label">Try Samples:</span>
+          <button class="btn-sample active" data-sample="yolo.webp">Sample 1 (YOLO Data)</button>
+          <button class="btn-sample" data-sample="yolo-detection.webp">Sample 2 (Safety Detection)</button>
+          <button class="btn-sample" data-sample="Flappybird.webp">Sample 3 (Flappy Game)</button>
+        </div>
+
+        <div class="custom-actions">
+          <label for="ai-upload-input" class="btn btn-secondary btn-sm">
+            <i class="fa-solid fa-upload"></i> Upload Image
+          </label>
+          <input type="file" id="ai-upload-input" accept="image/*" class="sr-only">
+          
+          <button id="ai-run-btn" class="btn btn-primary btn-sm" disabled>
+            <i class="fa-solid fa-play"></i> Run Detection
+          </button>
+        </div>
+      </div>
+
+      <div class="ai-viewport-wrapper">
+        <div class="ai-media-container">
+          <img id="ai-target-image" src="yolo.webp" alt="Target image for AI detection" crossorigin="anonymous">
+          <canvas id="ai-canvas"></canvas>
+        </div>
+        <div id="ai-results-overlay" class="ai-results-panel">
+          <h4><i class="fa-solid fa-list-check"></i> Detected Objects</h4>
+          <ul id="ai-detected-list" class="detected-list">
+            <li class="detected-placeholder">Click "Run Detection" to view identified objects with confidence scores.</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -453,7 +562,7 @@
   <section id="achievements">
     <div class="section-header reveal">
       <p class="section-subtitle">Highlights & Milestones</p>
-      <h2 class="section-title">Achievements</h2>
+      <h2 class="section-title">Achievements & Live Stats</h2>
     </div>
 
     <div class="achievements-grid">
@@ -484,6 +593,63 @@
         <div class="achievement-info">
           <h4>Continuous Technical Training</h4>
           <p>Earned certifications and completed specialized coursework in Object-Oriented Programming, Computer Vision, and Web Development.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Stats Cards (GitHub API + Problem Solving) -->
+    <div class="live-stats-container reveal">
+      <!-- GitHub Live Stats -->
+      <div id="github-stats-card" class="stats-card">
+        <div class="stats-card-header">
+          <i class="fa-brands fa-github"></i>
+          <h3>GitHub Live Stats</h3>
+          <span class="stats-live-badge"><span class="pulse-dot"></span> API Sync</span>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span id="gh-repo-count" class="stat-num"><i class="fa-solid fa-spinner fa-spin"></i></span>
+            <span class="stat-label">Public Repos</span>
+          </div>
+          <div class="stat-item">
+            <span id="gh-star-count" class="stat-num"><i class="fa-solid fa-spinner fa-spin"></i></span>
+            <span class="stat-label">Total Stars</span>
+          </div>
+          <div class="stat-item">
+            <span id="gh-followers" class="stat-num"><i class="fa-solid fa-spinner fa-spin"></i></span>
+            <span class="stat-label">Followers</span>
+          </div>
+        </div>
+        <a href="https://github.com/RajputPraful" target="_blank" rel="noopener noreferrer" class="stats-link">
+          Explore @RajputPraful on GitHub <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <!-- Problem Solving Metrics -->
+      <div id="coding-stats-card" class="stats-card">
+        <div class="stats-card-header">
+          <i class="fa-solid fa-code-branch"></i>
+          <h3>Competitive Coding Metrics</h3>
+          <span class="stats-live-badge"><span class="pulse-dot"></span> Active</span>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-num text-easy">120+</span>
+            <span class="stat-label">Easy Solved</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num text-medium">85+</span>
+            <span class="stat-label">Medium Solved</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num text-hard">25+</span>
+            <span class="stat-label">Hard Solved</span>
+          </div>
+        </div>
+        <div class="coding-tags">
+          <span class="chip"><i class="fa-solid fa-check"></i> Python DSA</span>
+          <span class="chip"><i class="fa-solid fa-check"></i> C++ STL</span>
+          <span class="chip"><i class="fa-solid fa-check"></i> Dynamic Programming</span>
         </div>
       </div>
     </div>
@@ -590,13 +756,54 @@
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <p>© 2026 Praful Singh. All rights reserved.</p>
-      <button id="back-to-top" class="back-to-top" aria-label="Scroll back to top of page">
-        <i class="fa-solid fa-arrow-up"></i>
+  <!-- =========================================================================
+       PROJECT QUICK VIEW ACCESSIBLE MODAL
+       ========================================================================= -->
+  <div id="project-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-card">
+      <button id="modal-close" class="modal-close-btn" aria-label="Close project modal">
+        <i class="fa-solid fa-xmark"></i>
       </button>
+      
+      <div class="modal-body">
+        <div class="modal-media">
+          <img id="modal-img" src="" alt="Project Preview Screenshot" loading="lazy">
+          <span id="modal-badge" class="project-badge"></span>
+        </div>
+
+        <div class="modal-content">
+          <h3 id="modal-title" class="modal-title">Project Title</h3>
+          <p id="modal-summary" class="modal-summary">Detailed project summary text goes here...</p>
+
+          <div class="modal-section">
+            <h4><i class="fa-solid fa-star gradient-text"></i> Key Highlights & Technical Achievements</h4>
+            <ul id="modal-highlights" class="modal-highlights-list">
+              <!-- Dynamically populated -->
+            </ul>
+          </div>
+
+          <div class="modal-section">
+            <h4><i class="fa-solid fa-layer-group gradient-text"></i> Architecture & Technologies</h4>
+            <div id="modal-tags" class="project-tags">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <a id="modal-github" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <i class="fa-brands fa-github"></i> View GitHub Repository
+            </a>
+            <a id="modal-demo" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <i class="fa-solid fa-external-link"></i> Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
+  </div>
+
+  <!-- Cloudflare Privacy-Respecting Analytics (Script placeholder - zero cookies) -->
+  <!-- <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_ANALYTICS_TOKEN"}'></script> -->
 
   <!-- Main JavaScript Module -->
   <script src="main.js"></script>

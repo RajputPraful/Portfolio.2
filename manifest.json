@@ -1,0 +1,17 @@
+{
+  "name": "Praful Singh — CSE Student & Developer Portfolio",
+  "short_name": "Praful Portfolio",
+  "description": "Personal developer portfolio of Praful Singh showcasing projects in Python, C/C++, Web Development, and AI/ML.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#090d16",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
