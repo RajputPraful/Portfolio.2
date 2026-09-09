@@ -519,10 +519,55 @@ function initProjectModal() {
       tags: ["Computer Vision", "YOLOv8", "PyTorch", "Real-Time Detection", "OpenCV"],
       github: "https://github.com/RajputPraful",
       demo: null
+    },
+    "mcp-nitro-stack": {
+      title: "MCP Nitro Stack — Amrita Hackathon Project",
+      category: "Hackathon / AI Stack",
+      image: "mcp-nitro-certificate.jpg",
+      isCertificate: true,
+      summary: "Full-stack AI tool integration & backend microservices stack developed by Praful Singh (Team 'ByteDex') during the Amrita University Amritapuri Campus Hackathon (Jul 17-18, 2026). Powered by Nitrostack infrastructure and Model Context Protocol (MCP), recognized with an official Certificate of Participation.",
+      highlights: [
+        "Participated as a key member of team 'ByteDex' at the Amrita University Amritapuri Campus Hackathon (Jul 17-18, 2026)",
+        "Architected Model Context Protocol (MCP) server hooks and Nitrostack backend services for high-speed AI workflows",
+        "Awarded official Certificate of Participation signed by Abhishek Pandit (CEO, Nitrostack) and Pablo Jiménez Godoy (CEO, Wekan Enterprises)",
+        "Built scalable microservices API handlers and asynchronous payload parsers under tight hackathon sprint timelines"
+      ],
+      tags: ["MCP", "Nitrostack", "Python", "JavaScript", "REST APIs", "Hackathon", "Microservices"],
+      github: "https://github.com/RajputPraful",
+      demo: null,
+      certificate: "mcp-nitro-certificate.jpg"
     }
   };
 
   let triggerBtn = null;
+  const modalImg = document.getElementById("modal-img");
+  const lightbox = document.getElementById("image-lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxClose = document.getElementById("lightbox-close");
+
+  function openLightbox(imgSrc) {
+    if (!lightbox || !lightboxImg) return;
+    lightboxImg.src = imgSrc;
+    lightbox.classList.add("active");
+    lightbox.setAttribute("aria-hidden", "false");
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.remove("active");
+    lightbox.setAttribute("aria-hidden", "true");
+  }
+
+  if (lightboxClose) {
+    lightboxClose.addEventListener("click", closeLightbox);
+  }
+  if (lightbox) {
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox || e.target === lightboxClose || e.target.closest("#lightbox-close")) {
+        closeLightbox();
+      }
+    });
+  }
 
   function openModal(projectId) {
     const data = PROJECTS_DATA[projectId];
@@ -530,7 +575,16 @@ function initProjectModal() {
 
     document.getElementById("modal-title").textContent = data.title;
     document.getElementById("modal-summary").textContent = data.summary;
-    document.getElementById("modal-img").src = data.image;
+    if (modalImg) {
+      modalImg.src = data.image;
+      if (data.isCertificate) {
+        modalImg.style.cursor = "zoom-in";
+        modalImg.title = "Click to enlarge Certificate of Participation";
+      } else {
+        modalImg.style.cursor = "pointer";
+        modalImg.title = "Click to enlarge image";
+      }
+    }
     document.getElementById("modal-badge").textContent = data.category;
 
     const highlightsList = document.getElementById("modal-highlights");
@@ -550,11 +604,36 @@ function initProjectModal() {
       demoBtn.style.display = "none";
     }
 
+    // Dynamic Certificate Button in Modal
+    let certBtn = document.getElementById("modal-cert-btn");
+    if (data.certificate) {
+      if (!certBtn) {
+        certBtn = document.createElement("button");
+        certBtn.id = "modal-cert-btn";
+        certBtn.className = "btn btn-secondary";
+        certBtn.innerHTML = '<i class="fa-solid fa-certificate"></i> View Certificate Fullscreen';
+        const actionsDiv = document.querySelector(".modal-actions");
+        if (actionsDiv) actionsDiv.appendChild(certBtn);
+      }
+      certBtn.style.display = "inline-flex";
+      certBtn.onclick = () => openLightbox(data.certificate);
+    } else if (certBtn) {
+      certBtn.style.display = "none";
+    }
+
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
 
     closeBtn.focus();
+  }
+
+  if (modalImg) {
+    modalImg.addEventListener("click", () => {
+      if (modalImg.src) {
+        openLightbox(modalImg.src);
+      }
+    });
   }
 
   function closeModal() {
@@ -567,12 +646,14 @@ function initProjectModal() {
     }
   }
 
-  quickBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
+  // Delegated click event listener for quick view buttons (handles dynamically bound buttons too)
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".project-quick-btn");
+    if (btn) {
       triggerBtn = btn;
       const projId = btn.getAttribute("data-project");
       openModal(projId);
-    });
+    }
   });
 
   closeBtn.addEventListener("click", closeModal);
@@ -582,8 +663,12 @@ function initProjectModal() {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("active")) {
-      closeModal();
+    if (e.key === "Escape") {
+      if (lightbox && lightbox.classList.contains("active")) {
+        closeLightbox();
+      } else if (modal.classList.contains("active")) {
+        closeModal();
+      }
     }
 
     // Trap focus inside modal when open
